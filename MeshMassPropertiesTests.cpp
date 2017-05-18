@@ -15,8 +15,8 @@
 #define EXPOSE_HELPER_FUNCTIONS_FOR_UNIT_TEST
 #define VERBOSE_UNIT_TESTS
 
-const btScalar acceptableRelativeError(1.0e-5);
-const btScalar acceptableAbsoluteError(1.0e-4);
+const btScalar acceptableRelativeError(1.0e-5f);
+const btScalar acceptableAbsoluteError(1.0e-4f);
 
 void printMatrix(const std::string& name, const btMatrix3x3& matrix) {
     std::cout << name << " = [" << std::endl;
@@ -38,21 +38,21 @@ void MeshInfoTests::testParallelAxisTheorem() {
     std::cout << "\n" << __FUNCTION__ << std::endl;
 #endif // VERBOSE_UNIT_TESTS
 
-    btScalar bigBoxX = 7.0;
-    btScalar bigBoxY = 9.0;
-    btScalar bigBoxZ = 11.0;
+    btScalar bigBoxX = 7.0f;
+    btScalar bigBoxY = 9.0f;
+    btScalar bigBoxZ = 11.0f;
     btScalar bigBoxMass = bigBoxX * bigBoxY * bigBoxZ;
     btMatrix3x3 bitBoxInertia;
     computeBoxInertia(bigBoxMass, btVector3(bigBoxX, bigBoxY, bigBoxZ), bitBoxInertia);
 
-    btScalar smallBoxX = bigBoxX / 2.0;
+    btScalar smallBoxX = bigBoxX / 2.0f;
     btScalar smallBoxY = bigBoxY;
     btScalar smallBoxZ = bigBoxZ;
     btScalar smallBoxMass = smallBoxX * smallBoxY * smallBoxZ;
     btMatrix3x3 smallBoxI;
     computeBoxInertia(smallBoxMass, btVector3(smallBoxX, smallBoxY, smallBoxZ), smallBoxI);
 
-    btVector3 smallBoxOffset(smallBoxX / 2.0, 0.0, 0.0);
+    btVector3 smallBoxOffset(smallBoxX / 2.0f, 0.0f, 0.0f);
 
     btMatrix3x3 smallBoxShiftedRight = smallBoxI;
     applyParallelAxisTheorem(smallBoxShiftedRight, smallBoxOffset, smallBoxMass);
@@ -89,23 +89,23 @@ void MeshInfoTests::testTetrahedron(){
 
     // these numbers from the Tonon paper:
     btVector3 points[4];
-    points[0] = btVector3(8.33220, -11.86875, 0.93355);
-    points[1] = btVector3(0.75523, 5.00000, 16.37072);
-    points[2] = btVector3(52.61236, 5.00000, -5.38580);
-    points[3] = btVector3(2.00000, 5.00000, 3.00000);
+    points[0] = btVector3(8.33220f, -11.86875f, 0.93355f);
+    points[1] = btVector3(0.75523f, 5.00000f, 16.37072f);
+    points[2] = btVector3(52.61236f, 5.00000f, -5.38580f);
+    points[3] = btVector3(2.00000f, 5.00000f, 3.00000f);
 
-    btScalar expectedVolume = 1873.233236;
+    btScalar expectedVolume = 1873.233236f;
 
     btMatrix3x3 expectedInertia;
-    expectedInertia[0][0] = 43520.33257;
-    expectedInertia[1][1] = 194711.28938;
-    expectedInertia[2][2] = 191168.76173;
-    expectedInertia[1][2] = -4417.66150;
-    expectedInertia[2][1] = -4417.66150;
-    expectedInertia[0][2] = 46343.16662;
-    expectedInertia[2][0] = 46343.16662;
-    expectedInertia[0][1] = -11996.20119;
-    expectedInertia[1][0] = -11996.20119;
+    expectedInertia[0][0] = 43520.33257f;
+    expectedInertia[1][1] = 194711.28938f;
+    expectedInertia[2][2] = 191168.76173f;
+    expectedInertia[1][2] = -4417.66150f;
+    expectedInertia[2][1] = -4417.66150f;
+    expectedInertia[0][2] = 46343.16662f;
+    expectedInertia[2][0] = 46343.16662f;
+    expectedInertia[0][1] = -11996.20119f;
+    expectedInertia[1][0] = -11996.20119f;
 
     // compute volume
     btScalar volume = computeTetrahedronVolume(points);
@@ -158,23 +158,23 @@ void MeshInfoTests::testOpenTetrahedonMesh() {
 
     // these numbers from the Tonon paper:
     VectorOfPoints points;
-    points.push_back(btVector3(8.33220, -11.86875, 0.93355));
-    points.push_back(btVector3(0.75523, 5.00000, 16.37072));
-    points.push_back(btVector3(52.61236, 5.00000, -5.38580));
-    points.push_back(btVector3(2.00000, 5.00000, 3.00000));
+    points.push_back(btVector3(8.33220f, -11.86875f, 0.93355f));
+    points.push_back(btVector3(0.75523f, 5.00000f, 16.37072f));
+    points.push_back(btVector3(52.61236f, 5.00000f, -5.38580f));
+    points.push_back(btVector3(2.00000f, 5.00000f, 3.00000f));
 
-    btScalar expectedVolume = 1873.233236;
+    btScalar expectedVolume = 1873.233236f;
 
     btMatrix3x3 expectedInertia;
-    expectedInertia[0][0] = 43520.33257;
-    expectedInertia[1][1] = 194711.28938;
-    expectedInertia[2][2] = 191168.76173;
-    expectedInertia[1][2] = -4417.66150;
-    expectedInertia[2][1] = -4417.66150;
-    expectedInertia[0][2] = 46343.16662;
-    expectedInertia[2][0] = 46343.16662;
-    expectedInertia[0][1] = -11996.20119;
-    expectedInertia[1][0] = -11996.20119;
+    expectedInertia[0][0] = 43520.33257f;
+    expectedInertia[1][1] = 194711.28938f;
+    expectedInertia[2][2] = 191168.76173f;
+    expectedInertia[1][2] = -4417.66150f;
+    expectedInertia[2][1] = -4417.66150f;
+    expectedInertia[0][2] = 46343.16662f;
+    expectedInertia[2][0] = 46343.16662f;
+    expectedInertia[0][1] = -11996.20119f;
+    expectedInertia[1][0] = -11996.20119f;
 
     // test as an open mesh with one triangle
     VectorOfPoints shiftedPoints;
@@ -226,26 +226,26 @@ void MeshInfoTests::testClosedTetrahedronMesh() {
     // these numbers from the Tonon paper:
     VectorOfPoints points;
     points.reserve(4);
-    points.push_back(btVector3(8.33220, -11.86875, 0.93355));
-    points.push_back(btVector3(0.75523, 5.00000, 16.37072));
-    points.push_back(btVector3(52.61236, 5.00000, -5.38580));
-    points.push_back(btVector3(2.00000, 5.00000, 3.00000));
+    points.push_back(btVector3(8.33220f, -11.86875f, 0.93355f));
+    points.push_back(btVector3(0.75523f, 5.00000f, 16.37072f));
+    points.push_back(btVector3(52.61236f, 5.00000f, -5.38580f));
+    points.push_back(btVector3(2.00000f, 5.00000f, 3.00000f));
 
-    btScalar expectedVolume = 1873.233236;
+    btScalar expectedVolume = 1873.233236f;
 
     btMatrix3x3 expectedInertia;
-    expectedInertia[0][0] = 43520.33257;
-    expectedInertia[1][1] = 194711.28938;
-    expectedInertia[2][2] = 191168.76173;
+    expectedInertia[0][0] = 43520.33257f;
+    expectedInertia[1][1] = 194711.28938f;
+    expectedInertia[2][2] = 191168.76173f;
 
-    expectedInertia[1][2] = -4417.66150;
-    expectedInertia[2][1] = -4417.66150;
+    expectedInertia[1][2] = -4417.66150f;
+    expectedInertia[2][1] = -4417.66150f;
 
-    expectedInertia[0][2] = 46343.16662;
-    expectedInertia[2][0] = 46343.16662;
+    expectedInertia[0][2] = 46343.16662f;
+    expectedInertia[2][0] = 46343.16662f;
 
-    expectedInertia[0][1] = -11996.20119;
-    expectedInertia[1][0] = -11996.20119;
+    expectedInertia[0][1] = -11996.20119f;
+    expectedInertia[1][0] = -11996.20119f;
 
     btVector3 expectedCenterOfMass = 0.25 * (points[0] + points[1] + points[2] + points[3]);
 
@@ -347,20 +347,20 @@ void MeshInfoTests::testBoxAsMesh() {
     //   |   |/                        |/
     //       0 ------------------------1
 
-    btScalar x(5.0);
-    btScalar y(3.0);
-    btScalar z(2.0);
+    btScalar x(5.0f);
+    btScalar y(3.0f);
+    btScalar z(2.0f);
 
     VectorOfPoints points;
     points.reserve(8);
 
-    points.push_back(btVector3(0.0, 0.0, 0.0));
-    points.push_back(btVector3(x, 0.0, 0.0));
-    points.push_back(btVector3(0.0, y, 0.0));
-    points.push_back(btVector3(x, y, 0.0));
-    points.push_back(btVector3(0.0, 0.0, z));
-    points.push_back(btVector3(x, 0.0, z));
-    points.push_back(btVector3(0.0, y, z));
+    points.push_back(btVector3(0.0f, 0.0f, 0.0f));
+    points.push_back(btVector3(x, 0.0f, 0.0f));
+    points.push_back(btVector3(0.0f, y, 0.0f));
+    points.push_back(btVector3(x, y, 0.0f));
+    points.push_back(btVector3(0.0f, 0.0f, z));
+    points.push_back(btVector3(x, 0.0f, z));
+    points.push_back(btVector3(0.0f, y, z));
     points.push_back(btVector3(x, y, z));
 
     VectorOfIndices triangles = {
@@ -379,7 +379,7 @@ void MeshInfoTests::testBoxAsMesh() {
     };
 
     // compute expected mass properties analytically
-    btVector3 expectedCenterOfMass = 0.5 * btVector3(x, y, z);
+    btVector3 expectedCenterOfMass = 0.5f * btVector3(x, y, z);
     btScalar expectedVolume = x * y * z;
     btMatrix3x3 expectedInertia;
     computeBoxInertia(expectedVolume, btVector3(x, y, z), expectedInertia);
@@ -401,7 +401,7 @@ void MeshInfoTests::testBoxAsMesh() {
 
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            if (expectedInertia [i][j] == btScalar(0.0)) {
+            if (expectedInertia [i][j] == 0.0f) {
                 error = mesh.m_inertia[i][j] - expectedInertia[i][j];
                 if (fabsf(error) > acceptableAbsoluteError) {
                     std::cout << __FILE__ << ":" << __LINE__ << " ERROR : inertia[" << i << "][" << j << "] off by " << error
